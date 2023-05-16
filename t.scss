@@ -81,12 +81,14 @@ textarea {
 }
 
 textarea:focus {
-  border: 15px solid rgba(0, 0, 0, 0.06);
+//  border: 15px solid rgba(0, 0, 0, 0.06);
+  border: 0;
   padding: 0;
 }
 
 
 select {
+  font-size: .7rem;
   padding: .1em;
   margin: .25em auto;
   text-align: left;
@@ -237,57 +239,22 @@ input#cartridge-title{
     display: inline-block;
     font-size: .5rem;
   }
+  
+  a[jump]::after{
+    content: " )";
+    opacity: 0;
+  }
+  a[jump]::before{
+    content: "( ";
+    opacity: 0;
+  }
+  
+  a[jump][active]::before, a[jump][active]::after{
+    opacity: 0.5;
+  }
+  
 
 }
-
-
-#start {
-  border: 0;
-  outline: 0;
-  border-radius: 0;
-  height: 100vh;
-  width: 100vw;
-  margin: 0;
-  background-size: cover;
-
-  #options {
-    height: 30vh;
-    min-height: 200px;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-
-    a {
-      width: 100%;
-      text-decoration: none;
-      cursor: pointer;
-
-      h2 {
-        line-height: 100%;
-        border: 0;
-        color: $c;
-        font-family: $serif-alt;
-        text-transform: uppercase;
-        font-size: 1.6rem;
-        text-align: center;
-      }
-    }
-
-    a:hover {
-//      background: rgba(0, 0, 0, 1);
-    }
-  }
-
-  h1[title] {
-    letter-spacing: -3px;
-    width: 100%;
-    display: inline-block;
-    font-family: $serif-alt;
-    font-size: 3em;
-    line-height: 50vh;
-  }
-}
-
 
 
 
@@ -408,6 +375,7 @@ PLAY
 #play {
 
   background: #fff;
+  border: 1px solid $g1;
   position: relative;
   width: $square;
   animation: pulse-engine 5s infinite;
@@ -420,6 +388,11 @@ PLAY
   
   h2{
     font-size: .8rem;
+    font-family: $serif-alt;
+  }
+  
+  ._playwhatscene{
+    display: none;
   }
 
   .play-overlay {
@@ -448,6 +421,7 @@ PLAY
     letter-spacing: -.5px;
     padding: 1em;
     line-height: 90%;
+    font-weight: normal;
   }
 
   #e-text {
@@ -539,8 +513,11 @@ PLAY
   #e-play {}
 
   h2 {
-    color: $l;
-    border-bottom: 1px solid $l;
+    color: $g2;
+    font-weight: normal;
+    font-family: $serif-alt;
+    text-transform: uppercase;
+    letter-spacing: .25px;
   }
 
 }
@@ -574,17 +551,13 @@ textarea{
   #scene_selector {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    margin: .25em 0;
-    text-align: center;
+    justify-content: flex-start;
+    margin: 0;
     font-family: $serif-alt;
-    letter-spacing: -1px;
 
     ._s {
       display: inline-block;
       padding: .25em;
-      background: $c;
-//      color: $l;
       color: transparent;
       font-size: .8rem;
       vertical-align: middle;
@@ -595,7 +568,7 @@ textarea{
     }
 
     ._s.__start {
-      border: 1px solid $p;
+      border: 2px solid $g1;
     }
 
     ._s.__active {
@@ -611,11 +584,11 @@ textarea{
 
 
     ._s.__unused {
-      opacity: 0.1;
+      opacity: 0.05;
     }
 
     ._s:hover {
-      transform: scale(1.03);
+      transform: scale(.8);
 //      filter: invert(1);
       cursor: pointer;
       border: 1px solid #000;
@@ -630,17 +603,16 @@ textarea{
 
 #scene_selector {
   ._s {
-    color: $l;
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     margin: 0 .02em;
     text-align: center;
     transition: all .13s linear;
     span{display:none;}
     @media only screen and (max-width: 600px) {
-    width: 16px;
-      height: 16px;
+    width: 14px;
+      height: 14px;
     }
   }
   
@@ -803,7 +775,6 @@ textarea{
 }
 
 #engine-window{
-  outline: 1px solid red;
   display: flex;
   flex-direction: row;
     align-content: center;
@@ -830,15 +801,17 @@ textarea{
   
   .panel{
     margin: 0;
-    padding: .5em 0;
+    padding: .25em 0;
   }
   
   @media only screen and (max-width: 600px) { // MOBILE
     width: 100%;
     padding: 0;
+    margin-top: 1em;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     text-align: center;
+padding-bottom: 30px;
 //    background: yellow;
     
     .panel{
@@ -860,7 +833,7 @@ textarea{
   }
   
   label{
-    width: 75px;
+    width: 45px;
     display: inline-block;
     font-size: .6rem;
     text-transform: uppercase;
@@ -872,28 +845,15 @@ textarea{
     background: 0;
     cursor: pointer;
     width: 100%;
-    padding: 0;
+    min-width: 40px;
+    padding: 0 .25em 0 0;
     margin: 0;
   }
-//   input[type=color] {
-//  display: block;
-//  width: 100%;
-//  height: 40px;
-//  border: none;
-//  border-color: transparent;
-//
-//  input::-webkit-color-swatch {
-//    border: none;
-//  }
-//}
   
   .controls-scene{
 //  padding: 0 .5em;
-    background: red;
+    text-align: left;
   }
-
-  
-  
   
 }
 
@@ -1006,7 +966,7 @@ textarea{
 
 @keyframes pulse-engine {
   0% {
-    box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.05);
   }
 
   70% {

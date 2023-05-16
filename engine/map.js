@@ -85,7 +85,7 @@ const mapControls = {
         
         let c;
             if (c == 0 || c == undefined) {
-              c = "#000000"; // default
+              c = "#dddddd"; // default
             }
         
         // starting scene
@@ -248,7 +248,7 @@ const mapControls = {
     console.log( coord[0], coord[1]);
     let i = sceneControls.getSceneIndex(parseInt(coord[0]), parseInt(coord[1])); // indice in scenes.s[i]
     
-    console.log(i, coord[0], coord[1]);
+//    console.log(i, coord[0], coord[1]);
 
     //    console.log("coord: " + coord[0] + "," + coord[1]);
 
@@ -298,8 +298,141 @@ const mapControls = {
 
     mapControls.updateActive(active_scene.x, active_scene.y); // add active class
 
+  }, 
+  sceneSwitch: function(x, y){
+    
+    sceneControls.saveScene(); // first, let's save the scene
+
+    let i = sceneControls.getSceneIndex(parseInt(x), parseInt(y)); // indice in scenes.s[i]
+    
+    
+    // –––––––––––––––––––
+    // Scene does not exist
+    // –––––––––––––––––––
+
+    if (typeof scenes.s[i] == 'undefined' || scenes.s[i] == null || $(this).hasClass("unused__")) {
+
+      if (!confirm("Do you want to create a new scene at " + x + ", " + y +  "?")) {
+        return;
+      }
+
+      // remove active scenes
+      $("#" + mapControls.MASTER + " ._s[data-scene='" + active_scene.x + "," + active_scene.y + "']").removeClass("__active").addClass("__inactive");
+      $("#" + mapControls.SIDE + " ._s[data-scene='" + active_scene.x + "," + active_scene.y + "']").removeClass("__active").addClass("__inactive");
+
+      // creating a new scene at that indice
+      scenes.s[i] = new Scene(parseInt(x), parseInt(y), true, globals.BG_default, "", "", "", "", "", 0);
+
+      // switching to the new scene
+      sceneControls.switchScene(i);
+
+      mapControls.updateActive(active_scene.x, active_scene.y); // add active class
+
+
+      $("#scene_selector div._s.__active").css("background", active_scene.color); //retain scene color 
+
+      alert("Scene created!");
+      return;
+    }
+
+    // –––––––––––––––––––
+    // Scene exists
+    // –––––––––––––––––––
+
+    //    console.log("Switching scene");
+
+    // remove the old scene
+    $("#" + mapControls.MASTER + " ._s[data-scene='" + active_scene.x + "," + active_scene.y + "']").removeClass("__active").addClass("__inactive");
+    $("#" + mapControls.SIDE + " ._s[data-scene='" + active_scene.x + "," + active_scene.y + "']").removeClass("__active").addClass("__inactive");
+
+    sceneControls.switchScene(i);
+    mapControls.clearMapActive();
+
+    $("." + mapControls.SCENE_DISPLAY).text(x + "," + y); // update scene
+
+    mapControls.updateActive(active_scene.x, active_scene.y); // add active class
+    
+    
+  },
+  convertCoord: function (direction, x, y) {
+
+    let new_x, new_y;
+
+    var scene_count = Math.sqrt((scenes.s).length);
+
+    switch (direction) {
+
+      case "n":
+        if (x > 0) {
+          new_x = x - 1;
+        } else {
+          new_x = null;
+        }
+        new_y = y;
+        break;
+
+      case "e":
+
+        if (y < scene_count - 1) {
+          new_y = y + 1;
+        } else {
+          new_y = null;
+        }
+
+        new_x = x;
+        break;
+
+      case "w":
+        if (y > 0) {
+          new_y = y - 1;
+        } else {
+          new_y = null;
+        }
+        new_x = x;
+        break;
+
+      case "s":
+
+        if (x < scene_count - 1) {
+          new_x = x + 1;
+        } else {
+          new_x = null;
+        }
+
+        new_y = y;
+        break;
+    }
+
+    // returns null if unconvertable
+    if (new_x == null || new_y == null) {
+      return null;
+    }
+
+    return [new_x, new_y];
   }
-}
+} 
+
+
+// Jump between scenes
+$(document).keyup(function(event) {
+  let dir = null;
+  if (event.shiftKey && event.which == 38) { dir = "n"; }
+  if (event.shiftKey && event.which == 37) { dir = "w"; }
+  if (event.shiftKey && event.which == 40) { dir = "s"; }
+  if (event.shiftKey && event.which == 39) { dir = "e"; }
+  
+  if(dir == null) return;
+  if($("#jump a[active]").text() !== "Edit") return;
+  
+  let _coord = mapControls.convertCoord(dir, active_scene.x, active_scene.y);
+  console.log(_coord);
+  mapControls.sceneSwitch(_coord[0], _coord[1]);
+  
+  
+});
+
+
+// Change Change starting scene
 
 $("#btn-changestartingscene").on("click", function () {
 

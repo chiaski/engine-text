@@ -91,13 +91,13 @@ button.--destructive:hover {
 
   button {
     margin: 0 .25em;
-  
-    
   }
 
-  button#btn-play {
+  button#btn-play{
     padding: 1em 5em;
     border-radius: 8px;
+    background:none;
+    mix-blend-mode:difference;
   }
 
   button#btn-clear {

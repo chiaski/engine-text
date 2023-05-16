@@ -101,6 +101,8 @@ button.--destructive:hover {
 .engine-buttons button#btn-play {
   padding: 1em 5em;
   border-radius: 8px;
+  background: none;
+  mix-blend-mode: difference;
 }
 .engine-buttons button#btn-clear {
   margin-top: 0.5em;

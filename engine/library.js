@@ -116,7 +116,7 @@ const libraryText = {
     $("#e").on("click", function () {
       libraryText.toggleText();
     });
-    
+//    
     
     $.each( libraryText.fonts, function( i, font ){
     $("select#select-font").append(`<option>` + font + `</option>`);
@@ -135,6 +135,53 @@ const libraryText = {
     $("#" + libraryText.$TEXT_EDITOR).keyup(function () {
       libraryText.saveText();
     });
+    
+    
+    // other things to capture
+    // font size
+    $("input[name='fontsize']").change(function () {
+      let t = $(this).val();
+      scenes.font_size = t;
+
+      $("#e-text textarea").css("font-size", t + "px");
+    });
+
+
+    // line height
+    $("input[name='lineheight']").change(function () {
+      let t = $(this).val();
+      scenes.font_lineheight = t;
+
+      $("#e textarea, #e-play textarea").css("line-height", t + "px");
+    });
+    
+
+    // letter spacing
+    $("input[name='letterspacing']").change(function () {
+      let t = $(this).val();
+      scenes.font_letterspacing = t;
+
+      $("#e textarea, #e-play textarea").css("letter-spacing", t + "px");
+    });
+    
+    // default values on init
+    libraryText.setDefaults();
+    
+    
+  },
+  
+  setDefaults: function(){
+
+    $("input[name='fontsize']").val(scenes.font_size);
+    $("input[name='lineheight']").val(scenes.font_lineheight);
+    $("input[name='letterspacing']").val(scenes.font_letterspacing);
+    
+    
+    $("#e textarea, #e-play textarea").css("font-size", scenes.font_size + "px");
+    $("#e textarea, #e-play textarea").css("line-height", scenes.font_lineheight + "px");
+    $("#e textarea, #e-play textarea").css("letter-spacing", scenes.font_letterspacing + "px");
+    
+  
   },
 
   isTextOn: function () {
@@ -148,12 +195,14 @@ const libraryText = {
   toggleText: function () {
 
     if (libraryText.isTextOn()) {
+      console.log("text on");
       $("button#btn-toggletext").text("Write  text");
       window.removeEventListener("keydown", arrow_keys_handler, false);
       window.addEventListener("keydown", arrow_keys_handler, false);
       $("button#btn-toggletext").removeClass("__toggled");
       $("#e #e-text textarea").removeClass("__toggled");
     } else {
+      console.log("text off");
 //
 //      objControls.clearSelected();
 //      objControls.saveObjects();
@@ -177,7 +226,7 @@ const libraryText = {
     let f = $("select#select-font").val();
 
     scenes.font = f;
-    $("#e textarea, #e-play textarea, select#select-font").css("font-family", scenes.font);
+    $("#e textarea, #e-play textarea, select#select-font, *[cartridge-title]").css("font-family", scenes.font);
   },
 
   // loadText: laod text into active scene
@@ -222,10 +271,6 @@ const libraryText = {
 
 libraryText.init();
 
-
-$("#e").click(function(){
-  libraryText.toggleText();
-})
 
 /*
 
@@ -278,24 +323,6 @@ $("input[name='cartridge-title']").keyup(function () {
   $("*[cartridge-title]").html(t);
   scenes.title = t;
   document.title = t;
-});
-
-
-// font size
-$("input[name='fontsize']").change(function () {
-  let t = $(this).val();
-  scenes.font_size = t;
-  
-  $("#e-text textarea").css("font-size", t + "px");
-});
-
-
-// line height
-$("input[name='lineheight']").change(function () {
-  let t = $(this).val();
-  scenes.font_lineheight = t;
-  
-  $("#e textarea, #e-play textarea").css("line-height", t + "px");
 });
 
 

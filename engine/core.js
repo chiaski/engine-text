@@ -7,10 +7,10 @@ var globals = {
   MAX_object_count: 15,
 
   // map width (columns)
-  MAP_width: 6,
+  MAP_width: 7,
 
   // map height (rows)
-  MAP_height: 6,
+  MAP_height: 7,
   
   BG_default: "#FFFFFF"
 
@@ -25,15 +25,16 @@ const scenes = {
 
   scene_count: 1,
   start_scene: {
-    x: 2,
-    y: 2
+    x: 3,
+    y: 3
   },
   cartridge: null, // will be the starting screen to the game
   audio: null,
   audio_loop: true,
   font: "default",
   font_size: 16,
-  font_lineheight: 16,
+  font_lineheight: 20,
+  font_letterspacing: 0,
   title: "Game",
 
   // ALL THE SCENESKMFAKSF

@@ -18,7 +18,6 @@ function Scene(x, y, active, color, object_count) {
 
   // has this scene been edited?
   this.active = active;
-
   // background color of the scene
   this.color = color;
   // any text
@@ -29,12 +28,8 @@ function Scene(x, y, active, color, object_count) {
 
   // scene title
   this.title = "";
-
   // scene caption
   this.caption = "";
-
-  this.object_count = 0;
-  this.objects = [];
 }
 
 
@@ -118,12 +113,17 @@ $("#btn-remix").on("click", function () {
   // copy
   scenes.audio = new_scenes.audio;
   scenes.font = new_scenes.font;
+  scenes.font_size = new_scenes.font_size;
+  scenes.font_lineheight = new_scenes.font_lineheight;
+  scenes.font_letterspacing = new_scenes.font_letterspacing;
+  scenes.title = new_scenes.title;
 
   if (scenes.font !== "default") {
-
     $("#e-play textarea").css("font-family", scenes.font);
     $("#e textarea").css("font-family", scenes.font);
   }
+  
+  libraryText.setDefaults();
 
   mapControls.clearMap();
   sceneControls.reassignScenes(new_scenes);
@@ -133,6 +133,9 @@ $("#btn-remix").on("click", function () {
 
   Tplayer.loadCover();
   sceneControls.switchScene(i);
+
+  $("*[cartridge-title]").html(scenes.title);
+  $("input#cartridge-title").val(scenes.title);
 
   document.getElementById("window-engine").scrollIntoView();
 
@@ -144,6 +147,7 @@ $("#btn-remix").on("click", function () {
   $("#btn-remixcartridge").fadeIn();
   $("#btn-changestartingscene").fadeIn();
 
+  
   alert("Successfully loaded cartridge");  
 });
 
@@ -223,7 +227,6 @@ const sceneControls = {
     target.effects = source.effects;
     target.title = source.title;
     target.caption = source.caption;
-
   },
   /* 
     checkActive

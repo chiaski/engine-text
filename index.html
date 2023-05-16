@@ -48,7 +48,7 @@
   </div>
 
   <div id="jump">
-    <a jump="editor" title="Put your scenes together..." active>Editor</a>
+    <a jump="editor" title="Put your scenes together..." active>Edit</a>
     <a jump="player" title="Take a look at how your game looks like on the player!">Preview</a>
     <br>
 
@@ -115,25 +115,6 @@
       <!-- MAP PANEL -->
       <section id="controls">
 
-        <!--   e            FONT CONTROLS -->
-        <div class="controls-fonts panel">
-          
-          <div class="param param-fontsize">
-<!--          <button id="btn-changefonttext" class="--small" title="Spice up the font a lil bit...">Change font</button>-->
-          <select id="select-font">
-            <option>Times New Roman</option>
-          </select>
-          </div>
-          
-
-          <div class="param param-fontsize">
-          <label>Font Size </label> <input id="btn-fontsize" type="number" name="fontsize" value="16">
-          </div>
-          
-          <div class="param param-lineheight">
-          <label>Line Height </label> <input id="btn-lineheight" type="number" name="lineheight" value="16">
-          </div>
-        </div>
 
         <!--               MAP  -->
         <div class="controls-scene panel">
@@ -154,12 +135,42 @@
             <button id="btn-scenecontrols-deletescene" title="You can't delete your starting scene.">DEL</button>
           </div>
         </div>
+        
+        <!--   e            FONT CONTROLS -->
+        <div class="controls-fonts panel">
+          
+          <div class="param param-fontsize">
+<!--          <button id="btn-changefonttext" class="--small" title="Spice up the font a lil bit...">Change font</button>-->
+          <select id="select-font">
+            <option>Times New Roman</option>
+          </select>
+          </div>
+          
 
+          <div class="param param-fontsize">
+          <label> Size </label> <input id="btn-fontsize" type="number" name="fontsize" value="12">
+          </div>
+          
+          <div class="param param-lineheight">
+          <label> Height </label> <input id="btn-lineheight" type="number" name="lineheight" value="20">
+          </div>
+          
+          
+          <div class="param param-letterspacing">
+          <label>Spacing </label> <input id="btn-letterspacing" type="number" name="letterspacing" value="0">
+          </div>
+          
+          <input type="color" name="scenecolorpicker" value="#ffffff" title="Can't the world look like so much more than this?">
+          
+          
+        </div>
+
+<!--
         <div class="controls-color panel">
 
-          <input type="color" name="scenecolorpicker" value="#ffffff" title="Can't the world look like so much more than this?">
 
         </div>
+-->
       </section>
     </div>
 
@@ -174,14 +185,14 @@
       <!--        <div class="play-overlay" style="background-image:url(assets/fx-scanline.gif);mix-blend-mode: multiply;opacity: 0.1;"></div>-->
 
       <h2>
-        <span cartridge-title>Preview</span>
-        <span class="_playwhatscene"></span>
+        <span>Preview</span>
+<!--        <span class="_playwhatscene"></span>-->
       </h2>
 
       <!-- THE 'START SCREEN' FOR GAMES   -->
 
       <div id="e-cartridge">
-        <h1 cartridge-title>Game title here</h1>
+        <h1 cartridge-title></h1>
       </div>
 
       <div id="e-controls">
@@ -207,7 +218,6 @@
 
     <div class="engine-buttons">
       <button id="btn-play" title="Ready to preview your little game?">
-        <img src="assets/icon-play.gif" style="width:20px;margin: -.5em 0;padding: 0;">
         Play
       </button>
       <!--

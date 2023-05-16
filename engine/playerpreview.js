@@ -152,7 +152,6 @@ const Tplayer = {
         }
 
         // okay, scene is accessible
-
         $(this)
           .attr("data-target", target[0] + "," + target[1])
           .bind("click", Tplayer.loadTarget);
@@ -228,7 +227,6 @@ const Tplayer = {
     }
 
     return [new_x + "," + new_y];
-
   },
 
   // loads scene (x,y)
@@ -335,7 +333,10 @@ const Tplayer = {
       $("#e-cartridge").delay(1000).fadeOut(1000);
     }
     
+    // FIX FONT
     $("#e-text textarea").css("font-size", scenes.font_size + "px"); // change font size
+    $("#e-text textarea").css("letter-spacing", scenes.font_letterspacing + "px"); // change font size
+    $("#e-text textarea").css("line-height", scenes.font_lineheight + "px"); // change font size
 
   // change text
   setTimeout(function () {

@@ -90,11 +90,12 @@ textarea {
 }
 
 textarea:focus {
-  border: 15px solid rgba(0, 0, 0, 0.06);
+  border: 0;
   padding: 0;
 }
 
 select {
+  font-size: 0.7rem;
   padding: 0.1em;
   margin: 0.25em auto;
   text-align: left;
@@ -227,44 +228,16 @@ input#cartridge-title {
   display: inline-block;
   font-size: 0.5rem;
 }
-
-#start {
-  border: 0;
-  outline: 0;
-  border-radius: 0;
-  height: 100vh;
-  width: 100vw;
-  margin: 0;
-  background-size: cover;
+#jump a[jump]::after {
+  content: " )";
+  opacity: 0;
 }
-#start #options {
-  height: 30vh;
-  min-height: 200px;
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
+#jump a[jump]::before {
+  content: "( ";
+  opacity: 0;
 }
-#start #options a {
-  width: 100%;
-  text-decoration: none;
-  cursor: pointer;
-}
-#start #options a h2 {
-  line-height: 100%;
-  border: 0;
-  color: #000000;
-  font-family: "Director";
-  text-transform: uppercase;
-  font-size: 1.6rem;
-  text-align: center;
-}
-#start h1[title] {
-  letter-spacing: -3px;
-  width: 100%;
-  display: inline-block;
-  font-family: "Director";
-  font-size: 3em;
-  line-height: 50vh;
+#jump a[jump][active]::before, #jump a[jump][active]::after {
+  opacity: 0.5;
 }
 
 ._howmany::after {
@@ -351,6 +324,7 @@ PLAY
 
 #play {
   background: #fff;
+  border: 1px solid #b6b7b7;
   position: relative;
   width: 360px;
   animation: pulse-engine 5s infinite;
@@ -361,6 +335,10 @@ PLAY
 }
 #play h2 {
   font-size: 0.8rem;
+  font-family: "Director";
+}
+#play ._playwhatscene {
+  display: none;
 }
 #play .play-overlay {
   position: absolute;
@@ -385,6 +363,7 @@ PLAY
   letter-spacing: -0.5px;
   padding: 1em;
   line-height: 90%;
+  font-weight: normal;
 }
 #play #e-text {
   position: absolute;
@@ -456,8 +435,11 @@ PLAY
   cursor: not-allowed;
 }
 #play h2 {
-  color: #edede8;
-  border-bottom: 1px solid #edede8;
+  color: #717374;
+  font-weight: normal;
+  font-family: "Director";
+  text-transform: uppercase;
+  letter-spacing: 0.25px;
 }
 
 /* 
@@ -476,16 +458,13 @@ textarea {
 #scene_s #scene_selector {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  margin: 0.25em 0;
-  text-align: center;
+  justify-content: flex-start;
+  margin: 0;
   font-family: "Director";
-  letter-spacing: -1px;
 }
 #scene_s #scene_selector ._s {
   display: inline-block;
   padding: 0.25em;
-  background: #000000;
   color: transparent;
   font-size: 0.8rem;
   vertical-align: middle;
@@ -495,7 +474,7 @@ textarea {
   border: 0.5px solid #000;
 }
 #scene_s #scene_selector ._s.__start {
-  border: 1px solid #eb80ff;
+  border: 2px solid #b6b7b7;
 }
 #scene_s #scene_selector ._s.__active {
   opacity: 1;
@@ -505,19 +484,18 @@ textarea {
   opacity: 0.5;
 }
 #scene_s #scene_selector ._s.__unused {
-  opacity: 0.1;
+  opacity: 0.05;
 }
 #scene_s #scene_selector ._s:hover {
-  transform: scale(1.03);
+  transform: scale(0.8);
   cursor: pointer;
   border: 1px solid #000;
 }
 
 #scene_selector ._s {
-  color: #edede8;
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   margin: 0 0.02em;
   text-align: center;
   transition: all 0.13s linear;
@@ -527,8 +505,8 @@ textarea {
 }
 @media only screen and (max-width: 600px) {
   #scene_selector ._s {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
   }
 }
 #scene_selector hr {
@@ -639,7 +617,6 @@ textarea {
 }
 
 #engine-window {
-  outline: 1px solid red;
   display: flex;
   flex-direction: row;
   align-content: center;
@@ -663,15 +640,17 @@ textarea {
 }
 #controls .panel {
   margin: 0;
-  padding: 0.5em 0;
+  padding: 0.25em 0;
 }
 @media only screen and (max-width: 600px) {
   #controls {
     width: 100%;
     padding: 0;
+    margin-top: 1em;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     text-align: center;
+    padding-bottom: 30px;
   }
   #controls .panel {
     text-align: center;
@@ -688,7 +667,7 @@ textarea {
   opacity: 0.6;
 }
 #controls label {
-  width: 75px;
+  width: 45px;
   display: inline-block;
   font-size: 0.6rem;
   text-transform: uppercase;
@@ -699,11 +678,12 @@ textarea {
   background: 0;
   cursor: pointer;
   width: 100%;
-  padding: 0;
+  min-width: 40px;
+  padding: 0 0.25em 0 0;
   margin: 0;
 }
 #controls .controls-scene {
-  background: red;
+  text-align: left;
 }
 
 #library-scene-controls button {
@@ -795,7 +775,7 @@ textarea {
 }
 @keyframes pulse-engine {
   0% {
-    box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.05);
   }
   70% {
     box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
