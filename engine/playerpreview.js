@@ -119,8 +119,6 @@ const Tplayer = {
     setTimeout(function () {
       $w.css("transform", "scale(0.99)");
     }, 500);
-
-
   },
 
   // iterates through navigation options on the active scene and updates it accordingly based on what's possible
@@ -336,6 +334,8 @@ const Tplayer = {
       // first, fade out cartridge very slowly lol
       $("#e-cartridge").delay(1000).fadeOut(1000);
     }
+    
+    $("#e-text textarea").css("font-size", scenes.font_size + "px"); // change font size
 
   // change text
   setTimeout(function () {
@@ -369,7 +369,6 @@ $("#btn-play").on("click", function () {
 
   $("#play").attr("tabindex", 0).focus();
   window.addEventListener("keydown", arrow_keys_handler, false);
-
 
   Tplayer.loadPlay(scenes.start_scene.x, scenes.start_scene.y);
 });

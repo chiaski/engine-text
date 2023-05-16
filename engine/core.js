@@ -32,6 +32,8 @@ const scenes = {
   audio: null,
   audio_loop: true,
   font: "default",
+  font_size: 16,
+  font_lineheight: 16,
   title: "Game",
 
   // ALL THE SCENESKMFAKSF

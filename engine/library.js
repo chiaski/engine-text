@@ -114,11 +114,16 @@ const libraryText = {
   init: function () {
     // click, edit text
     $("#e").on("click", function () {
-
       libraryText.toggleText();
     });
+    
+    
+    $.each( libraryText.fonts, function( i, font ){
+    $("select#select-font").append(`<option>` + font + `</option>`);
+    });
+    
 
-    $("button#btn-changefonttext").on("click", function () {
+    $("select#select-font").on("change", function () {
       libraryText.changeFont();
     });
 
@@ -169,13 +174,10 @@ const libraryText = {
   },
 
   changeFont: function () {
+    let f = $("select#select-font").val();
 
-    let font_random = libraryText.fonts[Math.floor(Math.random() * (libraryText.fonts).length)];
-
-    scenes.font = font_random;
-
-    $("#e textarea").css("font-family", font_random);
-    $("#e-play textarea").css("font-family", font_random);
+    scenes.font = f;
+    $("#e textarea, #e-play textarea, select#select-font").css("font-family", scenes.font);
   },
 
   // loadText: laod text into active scene
@@ -276,6 +278,24 @@ $("input[name='cartridge-title']").keyup(function () {
   $("*[cartridge-title]").html(t);
   scenes.title = t;
   document.title = t;
+});
+
+
+// font size
+$("input[name='fontsize']").change(function () {
+  let t = $(this).val();
+  scenes.font_size = t;
+  
+  $("#e-text textarea").css("font-size", t + "px");
+});
+
+
+// line height
+$("input[name='lineheight']").change(function () {
+  let t = $(this).val();
+  scenes.font_lineheight = t;
+  
+  $("#e textarea, #e-play textarea").css("line-height", t + "px");
 });
 
 

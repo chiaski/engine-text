@@ -13,7 +13,7 @@ console.log("map.js loaded");
 const mapControls = {
 
   MASTER: "sss",
-  SIDE: "map-controls #scene_selector",
+  SIDE: "controls #scene_selector",
   SCENE_DISPLAY: "_whatscene",
 
   /* 

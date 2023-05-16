@@ -30,7 +30,7 @@ EDITOR
   box-shadow: none !important;
   border: none !important;
   font-family: "Director" !important;
-  max-width: 120px !important;
+  max-width: 160px !important;
   font-size: 0.65em !important;
 }
 
@@ -44,11 +44,11 @@ button {
   border: 1px solid #1d1d1d;
   background: #ddd;
   color: #1d1d1d;
-  padding: 0.5em 1em;
   margin: 0.25em;
+  padding: 0;
   font-family: "Director";
   text-transform: uppercase;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   -webkit-transition: all 0.19s cubic-bezier(0.17, 0.67, 0.83, 0.67);
   transition: all 0.19s cubic-bezier(0.17, 0.67, 0.83, 0.67);
 }
@@ -57,7 +57,7 @@ button.--small {
   border: 0;
   background: 0;
   margin: 0;
-  font-size: 0.6rem;
+  font-size: 0.5rem;
 }
 
 button.--med {
@@ -87,44 +87,6 @@ button.--destructive:hover {
 
 .window {
   text-align: center;
-}
-
-/* PANELS & SIDEBARS */
-.panel {
-  width: 100%;
-  margin: 0.5em 0;
-  text-align: center;
-}
-.panel p {
-  padding: 1em;
-  font-weight: normal;
-  font-size: 0.85em;
-  line-height: 120%;
-}
-
-.panel._full {
-  border: 1.5px solid #000000;
-}
-
-.panel._sidebar {
-  border-top: none;
-}
-
-.sidebar {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  align-content: flex-start;
-  flex-wrap: wrap;
-  border-bottom: none;
-}
-
-.sidebar-left {
-  max-width: 190px;
-}
-
-.sidebar-right {
-  max-width: 150px;
 }
 
 .engine-buttons {

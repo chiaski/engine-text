@@ -357,7 +357,7 @@ PLAY
   overflow-y: hidden;
   cursor: text;
 }
-#e-text textarea.__toggled {
+#e-text text textarea.__toggled {
   border: 0.5em solid rgba(255, 255, 255, 0.45);
   padding: 0.3em;
 }
